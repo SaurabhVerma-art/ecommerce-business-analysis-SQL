@@ -1,7 +1,7 @@
 # ecommerce-business-analysis-SQL
 End-to-end E-commerce sales analysis using SQL | Revenue, Profit, Customer &amp; Time-series insights with advanced queries
 
-📌 Project Overview
+## 📌 Project Overview
 
 This project focuses on performing end-to-end sales analytics on an E-commerce dataset using SQL.
 
@@ -9,48 +9,48 @@ The goal is to analyze customer purchases, product performance, and order trends
 
 Instead of just writing basic queries, this project simulates how a Data Analyst works with real transactional data to answer practical business questions.
 
-🎯 Objectives
+## 🎯 Objectives
 
 The analysis aims to:
 
-Measure total revenue and sales performance
+- Measure total revenue and sales performance
 
-Identify top customers and repeat buyers
+- Identify top customers and repeat buyers
 
-Analyze product and category performance
+- Analyze product and category performance
 
-Track monthly sales and growth trends
+- Track monthly sales and growth trends
 
-Calculate business KPIs like AOV and MoM growth
+- Calculate business KPIs like AOV and MoM growth
 
-Extract insights that can help improve business strategy
+- Extract insights that can help improve business strategy
 
-📂 Dataset Description
+## 📂 Dataset Description
 
 The dataset contains 4 relational CSV files, directly imported into the database:
 
 Tables Used:
-🧑 Customers
+### 🧑 Customers
 
 Customer demographic details
 (customer_id, name, gender, age_group, country, signup_date)
 
-📦 Products
+### 📦 Products
 
 Product information with pricing
 (product_id, product_name, category, unit_price, cost)
 
-🧾 Orders
+### 🧾 Orders
 
 Order-level transactions
 (order_id, customer_id, order_date, status, payment_method, shipping_country)
 
-🛍️ Order_Items
+### 🛍️ Order_Items
 
 Line-level purchase details
 (order_item_id, order_id, product_id, quantity)
 
-🔗 Data Model
+## 🔗 Data Model
 Customers → Orders → Order_Items ← Products
 
 
@@ -62,144 +62,149 @@ One product → many sales
 
 This structure follows a star schema, commonly used in Business Intelligence systems.
 
-🔍 Data Exploration
+## 🔍 Data Exploration
 
 Initial exploration included:
 
-Checking row counts of each table
+- Checking row counts of each table
 
-Understanding relationships between tables
+- Understanding relationships between tables
 
-Identifying primary & foreign keys
+- Identifying primary & foreign keys
 
-Reviewing data types (dates, numeric fields)
+- Reviewing data types (dates, numeric fields)
 
-Verifying missing/null values
+- Verifying missing/null values
 
-Validating pricing and quantity fields
+- Validating pricing and quantity fields
 
-Example checks:
+#### Example checks:
 
-SELECT COUNT(*) FROM orders;
-SELECT DISTINCT category FROM products;
-SELECT MIN(order_date), MAX(order_date) FROM orders;
+SELECT COUNT(*)
+FROM orders;
 
-🧹 Data Cleaning
+SELECT DISTINCT category
+FROM products;
 
-Basic cleaning steps performed:
+SELECT MIN(order_date), MAX(order_date)
+FROM orders;
 
-Converted date columns to proper DATE format
+## 🧹 Data Cleaning
 
-Verified numeric columns (price, cost, quantity)
+- Basic cleaning steps performed:
 
-Removed inconsistencies in joins
+- Converted date columns to proper DATE format
 
-Ensured no duplicate IDs
+- Verified numeric columns (price, cost, quantity)
 
-Validated null values
+- Removed inconsistencies in joins
+
+- Ensured no duplicate IDs
+
+- Validated null values
 
 Since the dataset was mostly clean, minimal preprocessing was required.
 
-📊 Data Analysis
+## 📊 Data Analysis
 
 SQL queries were written to generate business insights using:
 
 Techniques Used
 
-Joins (INNER, LEFT)
+- Joins (INNER, LEFT)
 
-Aggregations (SUM, COUNT, AVG)
+- Aggregations (SUM, COUNT, AVG)
 
-GROUP BY
+- GROUP BY
 
-CTEs
+- CTEs
 
-Window Functions
+- Window Functions
 
-Date-based grouping
+- Date-based grouping
 
-Ranking & growth analysis
+- Ranking & growth analysis
 
-Key Metrics Calculated
-📈 Sales Metrics
+## Key Metrics Calculated
+### 📈 Sales Metrics
 
-Total Revenue
+- Total Revenue
 
-Total Orders
+- Total Orders
 
-Units Sold
+- Units Sold
 
-Average Order Value (AOV)
+- Average Order Value (AOV)
 
-👥 Customer Metrics
+### 👥 Customer Metrics
 
-Top spending customers
+- Top spending customers
 
-Repeat customers
+- Repeat customers
 
-Customers with no orders
+- Customers with no orders
 
-🛍️ Product Metrics
+### 🛍️ Product Metrics
 
-Top selling products
+- Top selling products
 
-Category-wise revenue
+- Category-wise revenue
 
-Best product in each category
+- Best product in each category
 
-Profit calculation
+- Profit calculation
 
-📅 Time-based Metrics
+### 📅 Time-based Metrics
 
-Monthly revenue trend
+- Monthly revenue trend
 
-Monthly order trend
+- Monthly order trend
 
-Running revenue total
+- Running revenue total
 
-Month-over-Month growth %
+- Month-over-Month growth %
 
-🔎 Findings / Insights
+## 🔎 Findings / Insights
 
 Some important insights discovered:
 
-Few products contribute majority of revenue (Pareto effect)
+- Few products contribute majority of revenue (Pareto effect)
 
-Repeat customers generate higher overall sales
+- Repeat customers generate higher overall sales
 
-Certain categories outperform others consistently
+- Certain categories outperform others consistently
 
-Revenue shows clear monthly growth trend
+- Revenue shows clear monthly growth trend
 
-Window functions helped identify ranking & growth patterns efficiently
+- Window functions helped identify ranking & growth patterns efficiently
 
 These insights can help businesses optimize:
 
-marketing strategies
+- marketing strategies
 
-inventory planning
+- inventory planning
 
-customer retention
+- customer retention
 
-pricing decisions
+- pricing decisions
 
-📑 Reports 
+## 📑 Reports 
 
 The following analytical reports were created using SQL:
 
-Sales Summary 
+- Sales Summary 
 
-Customer Ranking 
+- Customer Ranking 
 
-Category Performance 
+- Category Performance 
 
-Monthly Revenue Trend 
+- Monthly Revenue Trend 
 
-Running Total Revenue 
+- Running Total Revenue 
 
-MoM Growth 
+- MoM Growth 
 
-🛠️ SQL Concepts Demonstrated
+## 🛠️ SQL Concepts Demonstrated
 
 ✔ Complex Joins
 ✔ Aggregations
@@ -208,36 +213,33 @@ MoM Growth
 ✔ Date Functions
 ✔ Business KPI calculations
 
-▶️ How to Run
+## ▶️ How to Run
 
-Import CSV files into MySQL/PostgreSQL
+- Import CSV files into MySQL/PostgreSQL
 
-Load data into tables
+- Load data into tables
 
-Execute ecommerce_sql_queries.sql
+- Execute ecommerce_sql_queries.sql
 
-Run queries to reproduce insights
+- Run queries to reproduce insights
 
-🎯 Conclusion
+## 🎯 Conclusion
 
 This project demonstrates how SQL can be used to transform raw transactional data into actionable business insights.
 
 It highlights skills in:
 
-data exploration
+- data exploration
 
-analytical thinking
+- analytical thinking
 
-SQL querying
+- SQL querying
 
-business KPI design
+- business KPI design
 
 The workflow closely resembles tasks performed by Data Analysts and Business Intelligence professionals in real organizations.
 
-👨‍💻 Author
+## 👨‍💻 Author
 
-Saurabh Verma
-Data Analytics | SQL | Python | Power BI
-
-
-👉 folder structure bhi suggest kar du clean portfolio jaisa 😄
+#### Saurabh Verma
+#### Data Analytics | SQL | Python | Power BI
