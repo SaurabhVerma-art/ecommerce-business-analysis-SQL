@@ -29,6 +29,7 @@ The analysis aims to:
 
 The dataset contains 4 relational CSV files, directly imported into the database:
 
+
 Tables Used:
 #### 🧑 Customers
 
@@ -50,9 +51,9 @@ Order-level transactions
 Line-level purchase details
 (order_item_id, order_id, product_id, quantity)
 
+
 ## 🔗 Data Model
 Customers → Orders → Order_Items ← Products
-
 
 One customer → many orders
 
@@ -61,6 +62,7 @@ One order → many products
 One product → many sales
 
 This structure follows a star schema, commonly used in Business Intelligence systems.
+
 
 ## 🔍 Data Exploration
 
@@ -87,7 +89,8 @@ SELECT DISTINCT category
 FROM products;
 
 SELECT MIN(order_date), MAX(order_date)
-FROM orders;
+FROM orders; 
+
 
 ## 🧹 Data Cleaning
 
@@ -126,6 +129,7 @@ Techniques Used
 - Ranking & growth analysis
 
 ## Key Metrics Calculated
+
 ### 📈 Sales Metrics
 
 - Total Revenue
