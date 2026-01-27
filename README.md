@@ -30,22 +30,22 @@ The analysis aims to:
 The dataset contains 4 relational CSV files, directly imported into the database:
 
 Tables Used:
-### 🧑 Customers
+#### 🧑 Customers
 
 Customer demographic details
 (customer_id, name, gender, age_group, country, signup_date)
 
-### 📦 Products
+#### 📦 Products
 
 Product information with pricing
 (product_id, product_name, category, unit_price, cost)
 
-### 🧾 Orders
+#### 🧾 Orders
 
 Order-level transactions
 (order_id, customer_id, order_date, status, payment_method, shipping_country)
 
-### 🛍️ Order_Items
+#### 🛍️ Order_Items
 
 Line-level purchase details
 (order_item_id, order_id, product_id, quantity)
