@@ -85,30 +85,30 @@ Dataset was largely clean, requiring minimal preprocessing.
 
 ## 📊 Key Metrics (KPIs)
 Metric	Value
-- Total Orders	10,000
-- Total Revenue	₹7,450,763
-- Average Order Value (AOV)	₹745
+- **Total Orders**	10,000
+- **Total Revenue**	₹7,450,763
+- **Average Order Value (AOV)**	₹745
 
 ## 📈 Business Insights
 
-🔹 Revenue & Product Analysis
+🔹 **Revenue & Product Analysis**
 
 - Electronics category generated highest revenue (~₹4.5M)
 - Top products (iPhone 14 & Samsung Galaxy S23) contributed major share
 - Revenue is concentrated among few high-performing products (Pareto effect)
 
-🔹 Customer Behavior
+🔹 **Customer Behavior**
 
 - High-value customers significantly impact total revenue
 - Repeat customers show stronger engagement and higher contribution
 
-🔹 Time-Based Trends
+🔹 **Time-Based Trends**
 
 - Revenue increased by ~173% (Aug → Sep) and ~40% (Sep → Oct)
 - Peak observed in October (~₹226K)
 - Orders grew by ~303%, indicating rapid growth phase
 
-🔹 Advanced Analysis (MoM Growth)
+🔹 **Advanced Analysis (MoM Growth)**
 
 - Identified growth spikes and decline phases using window functions
 - Helps track business performance trends over time
@@ -140,8 +140,6 @@ LAG(revenue) OVER (ORDER BY order_month) AS prev_month_revenue,
 LAG(revenue) OVER (ORDER BY order_month)) * 100 AS mom_growth
 FROM monthly_revenue;
 ```
-
-📸 Project Screenshots
 
 ## 📸 Project Screenshots
 
