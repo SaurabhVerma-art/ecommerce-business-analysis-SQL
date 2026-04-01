@@ -1,247 +1,182 @@
-# ecommerce-business-analysis-SQL
-End-to-end E-commerce sales analysis using SQL | Revenue, Profit, Customer &amp; Time-series insights with advanced queries
+# 🛒 E-commerce Business Analysis using SQL
+
+![SQL](https://img.shields.io/badge/SQL-MySQL-blue)
+![Level](https://img.shields.io/badge/Level-Intermediate--Advanced-green)
+![Status](https://img.shields.io/badge/Project-Completed-brightgreen)
+
+---
 
 ## 📌 Project Overview
+This project performs end-to-end E-commerce sales analysis using SQL on transactional data.
 
-This project focuses on performing end-to-end sales analytics on an E-commerce dataset using SQL.
+The objective is to extract actionable business insights by analyzing customer behavior, product performance, and time-based trends — similar to real-world Data Analyst workflows.
 
-The goal is to analyze customer purchases, product performance, and order trends to generate meaningful business insights and KPIs that help in decision-making.
+---
 
-Instead of just writing basic queries, this project simulates how a Data Analyst works with real transactional data to answer practical business questions.
+## 🎯 Business Objectives
+- Measure overall business performance (Revenue, Orders, AOV)
+- Identify high-value and repeat customers
+- Analyze product and category contribution
+- Track monthly trends in sales and demand
+- Calculate Month-over-Month (MoM) growth
+- Generate insights for data-driven decision making
 
-## 🎯 Objectives
+---
 
-The analysis aims to:
+## 🧱 Data Model
+The dataset consists of 4 relational tables:
 
-- Measure total revenue and sales performance
+- **Customers** → Customer details  
+- **Orders** → Order-level transactions  
+- **Order_Items** → Line-level purchase data  
+- **Products** → Product & category details  
 
-- Identify top customers and repeat buyers
+### 🔗 Schema Relationship
+Customers → Orders → Order_Items ← Products  
 
-- Analyze product and category performance
+- One customer → many orders  
+- One order → many products  
+- One product → multiple transactions  
 
-- Track monthly sales and growth trends
+This structure follows a **Star Schema**, widely used in analytics systems.
 
-- Calculate business KPIs like AOV and MoM growth
-
-- Extract insights that can help improve business strategy
-
-## 📂 Dataset Description
-
-The dataset contains 4 relational CSV files, directly imported into the database:
-
-
-Tables Used:
-#### 🧑 Customers
-
-Customer demographic details
-(customer_id, name, gender, age_group, country, signup_date)
-
-#### 📦 Products
-
-Product information with pricing
-(product_id, product_name, category, unit_price, cost)
-
-#### 🧾 Orders
-
-Order-level transactions
-(order_id, customer_id, order_date, status, payment_method, shipping_country)
-
-#### 🛍️ Order_Items
-
-Line-level purchase details
-(order_item_id, order_id, product_id, quantity)
-
-
-## 🔗 Data Model
-Customers → Orders → Order_Items ← Products
-
-One customer → many orders
-
-One order → many products
-
-One product → many sales
-
-This structure follows a star schema, commonly used in Business Intelligence systems.
-
+---
 
 ## 🔍 Data Exploration
+Initial analysis included:
 
-Initial exploration included:
+- Row count validation  
+- Table relationship understanding  
+- Primary & foreign key checks  
+- Date range validation  
+- Null/missing value checks  
+- Category & product distribution  
 
-- Checking row counts of each table
+```sql
+SELECT COUNT(*) FROM orders;
 
-- Understanding relationships between tables
+SELECT DISTINCT category FROM products;
 
-- Identifying primary & foreign keys
-
-- Reviewing data types (dates, numeric fields)
-
-- Verifying missing/null values
-
-- Validating pricing and quantity fields
-
-#### Example checks:
-
-SELECT COUNT(*)
-FROM orders;
-
-SELECT DISTINCT category
-FROM products;
-
-SELECT MIN(order_date), MAX(order_date)
-FROM orders; 
-
+SELECT MIN(order_date), MAX(order_date) FROM orders;
+```
 
 ## 🧹 Data Cleaning
 
-- Basic cleaning steps performed:
+Performed basic data validation:
 
-- Converted date columns to proper DATE format
+- Converted date columns into proper format
+- Verified numeric fields (price, cost, quantity)
+- Ensured correct joins across tables
+- Checked for duplicates and null values
 
-- Verified numeric columns (price, cost, quantity)
+Dataset was largely clean, requiring minimal preprocessing.
 
-- Removed inconsistencies in joins
+## 🛠️ SQL Techniques Used
 
-- Ensured no duplicate IDs
+-Joins (INNER JOIN, LEFT JOIN)
+-Aggregations (SUM, COUNT, AVG)
+- GROUP BY & ORDER BY
+- Subqueries & CTEs
+- Window Functions:
+- RANK() → Product ranking
+- LAG() → MoM growth
+- Running Total calculations
+- Date Functions for time-series analysis
 
-- Validated null values
+## 📊 Key Metrics (KPIs)
+Metric	Value
+- Total Orders	10,000
+- Total Revenue	₹7,450,763
+- Average Order Value (AOV)	₹745
 
-Since the dataset was mostly clean, minimal preprocessing was required.
+## 📈 Business Insights
 
-## 📊 Data Analysis
+🔹 Revenue & Product Analysis
 
-SQL queries were written to generate business insights using:
+- Electronics category generated highest revenue (~₹4.5M)
+- Top products (iPhone 14 & Samsung Galaxy S23) contributed major share
+- Revenue is concentrated among few high-performing products (Pareto effect)
 
-Techniques Used
+🔹 Customer Behavior
 
-- Joins (INNER, LEFT)
+- High-value customers significantly impact total revenue
+- Repeat customers show stronger engagement and higher contribution
 
-- Aggregations (SUM, COUNT, AVG)
+🔹 Time-Based Trends
 
-- GROUP BY
+- Revenue increased by ~173% (Aug → Sep) and ~40% (Sep → Oct)
+- Peak observed in October (~₹226K)
+- Orders grew by ~303%, indicating rapid growth phase
 
-- CTEs
+🔹 Advanced Analysis (MoM Growth)
 
-- Window Functions
+- Identified growth spikes and decline phases using window functions
+- Helps track business performance trends over time
+- Useful for forecasting and strategic planning
 
-- Date-based grouping
+## 📊 Analytical Reports Generated
 
-- Ranking & growth analysis
+- Sales Summary
+- Customer Ranking
+- Category Performance
+- Monthly Revenue Trend
+- Running Revenue Total
+- Month-over-Month Growth
 
-## Key Metrics Calculated
+## 🧠 Sample SQL Query (MoM Growth)
+```sql
+WITH monthly_revenue AS (
+SELECT DATE_FORMAT(o.order_date, '%Y-%m') AS order_month,
+SUM(oi.quantity * p.unit_price) AS revenue
+FROM orders o
+JOIN order_items oi ON o.order_id = oi.order_id
+JOIN products p ON oi.product_id = p.product_id
+GROUP BY order_month
+)
+SELECT order_month,
+revenue,
+LAG(revenue) OVER (ORDER BY order_month) AS prev_month_revenue,
+((revenue - LAG(revenue) OVER (ORDER BY order_month)) /
+LAG(revenue) OVER (ORDER BY order_month)) * 100 AS mom_growth
+FROM monthly_revenue;
+```
 
-### 📈 Sales Metrics
+📸 Project Screenshots
 
-- Total Revenue
+## 📸 Project Screenshots
 
-- Total Orders
+### Total Revenue Analysis
+![Revenue](revenue.png)
 
-- Units Sold
+### Top Products
+![Products](Top_products.png)
 
-- Average Order Value (AOV)
+### Category Revenue
+![Category](Category_revenue.png)
 
-### 👥 Customer Metrics
+### MoM Order Growth Analysis
+![MoM](mom order growth.png)
 
-- Top spending customers
+---
 
-- Repeat customers
+## 💡 Key Learnings
 
-- Customers with no orders
-
-### 🛍️ Product Metrics
-
-- Top selling products
-
-- Category-wise revenue
-
-- Best product in each category
-
-- Profit calculation
-
-### 📅 Time-based Metrics
-
-- Monthly revenue trend
-
-- Monthly order trend
-
-- Running revenue total
-
-- Month-over-Month growth %
-
-## 🔎 Findings / Insights
-
-Some important insights discovered:
-
-- Few products contribute majority of revenue (Pareto effect)
-
-- Repeat customers generate higher overall sales
-
-- Certain categories outperform others consistently
-
-- Revenue shows clear monthly growth trend
-
-- Window functions helped identify ranking & growth patterns efficiently
-
-These insights can help businesses optimize:
-
-- marketing strategies
-
-- inventory planning
-
-- customer retention
-
-- pricing decisions
-
-## 📑 Reports 
-
-The following analytical reports were created using SQL:
-
-- Sales Summary 
-
-- Customer Ranking 
-
-- Category Performance 
-
-- Monthly Revenue Trend 
-
-- Running Total Revenue 
-
-- MoM Growth 
-
-## 🛠️ SQL Concepts Demonstrated
-
-✔ Complex Joins
-✔ Aggregations
-✔ Subqueries & CTEs
-✔ Window Functions (RANK, LAG, Running Total)
-✔ Date Functions
-✔ Business KPI calculations
-
+- Applied SQL to solve real-world business problems
+- Gained hands-on experience with window functions
+- Improved analytical thinking and KPI design
+- Learned how to convert raw data into business insights
+ 
 ## ▶️ How to Run
-
 - Import CSV files into MySQL/PostgreSQL
-
-- Load data into tables
-
-- Execute ecommerce_sql_queries.sql
-
+- Create tables and load data
+- Execute SQL script (ecommerce_sql_queries.sql)
 - Run queries to reproduce insights
-
+  
 ## 🎯 Conclusion
 
-This project demonstrates how SQL can be used to transform raw transactional data into actionable business insights.
+This project demonstrates how SQL can be used to transform raw transactional data into actionable insights.
 
-It highlights skills in:
-
-- data exploration
-
-- analytical thinking
-
-- SQL querying
-
-- business KPI design
-
-The workflow closely resembles tasks performed by Data Analysts and Business Intelligence professionals in real organizations.
+It reflects real-world data analytics workflows and showcases strong skills in SQL, data exploration, and business analysis. 
 
 ## 👨‍💻 Author
 
