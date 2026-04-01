@@ -155,7 +155,7 @@ FROM monthly_revenue;
 ![Category](Category_revenue.png)
 
 ### MoM Order Growth Analysis
-![MoM](mom order growth.png)
+![MoM](mom_order_growth.png)
 
 ---
 
